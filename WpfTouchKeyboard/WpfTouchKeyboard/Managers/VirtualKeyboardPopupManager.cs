@@ -89,7 +89,7 @@ namespace WpfTouchKeyboard.Managers
 
             if (_popup == null)
             {
-                FrameworkElement keyboardContent = AppSettings.UseFullKeyboard switch
+                FrameworkElement keyboardContent = AppSettings.KeyboardType switch
                 {
                     KeyboardType.All => new FullKeyboardView { },
                     KeyboardType.Number => new NumericKeyboardView { },
