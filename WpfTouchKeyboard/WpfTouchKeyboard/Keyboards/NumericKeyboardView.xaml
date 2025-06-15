@@ -4,7 +4,7 @@
   <UserControl.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Styles/KeyboardStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/WpfTouchKeyboard;component/Styles/KeyboardStyle.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </UserControl.Resources>

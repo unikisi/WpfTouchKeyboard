@@ -6,16 +6,5 @@
         xmlns:local="clr-namespace:WpfTouchKeyboard"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-  <Grid>
-    <StackPanel Margin="20">
-      <Button Content="切换虚拟键盘开关"
-                Width="200"
-                Height="30"
-                Margin="0,0,0,20"
-                Click="ToggleKeyboard_Click" />
 
-      <TextBox Height="30" Margin="0,0,0,10" />
-      <PasswordBox Height="30" />
-    </StackPanel>
-  </Grid>
 </Window>
