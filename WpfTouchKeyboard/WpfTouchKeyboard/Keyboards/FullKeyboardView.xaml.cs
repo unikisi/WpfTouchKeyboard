@@ -44,7 +44,7 @@ namespace WpfTouchKeyboard.Keyboards
                 return;
             }
 
-            if (VirtualKeyboardPopupManager.CurrentTarget is not { } inputTarget)
+            if (InternalKeyboardManager.CurrentTarget is not { } inputTarget)
                 return;
 
             if (key == "Back")

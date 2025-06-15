@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using WpfTouchKeyboard.Core;
 using WpfTouchKeyboard.Managers;
 
 namespace WpfTouchKeyboard.Keyboards
@@ -21,7 +20,7 @@ namespace WpfTouchKeyboard.Keyboards
 
         public static void SendKey(string key)
         {
-            if (VirtualKeyboardPopupManager.CurrentTarget is not { } target)
+            if (InternalKeyboardManager.CurrentTarget is not { } target)
                 return;
 
             switch (key)

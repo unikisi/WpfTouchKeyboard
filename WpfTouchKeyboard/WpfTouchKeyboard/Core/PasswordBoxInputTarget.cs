@@ -2,7 +2,7 @@
 
 namespace WpfTouchKeyboard.Core
 {
-    public class PasswordBoxInputTarget(PasswordBox passwordBox) : IKeyboardInputTarget
+    internal class PasswordBoxInputTarget(PasswordBox passwordBox) : IKeyboardInputTarget
     {
         public PasswordBox Target { get; } = passwordBox;
 

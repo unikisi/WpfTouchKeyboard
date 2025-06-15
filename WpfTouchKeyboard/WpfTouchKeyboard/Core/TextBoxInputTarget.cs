@@ -2,7 +2,7 @@
 
 namespace WpfTouchKeyboard.Core
 {
-    public class TextBoxInputTarget(TextBox textBox) : IKeyboardInputTarget
+    internal class TextBoxInputTarget(TextBox textBox) : IKeyboardInputTarget
     {
         public TextBox Target { get; } = textBox;
 

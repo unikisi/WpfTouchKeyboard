@@ -13,7 +13,16 @@
               Height="30"
               Margin="0,0,0,20"
               Click="ToggleKeyboard_Click" />
-
+      <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+        <TextBlock Text="键盘类型：" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <ComboBox x:Name="KeyboardTypeComboBox"
+                  Width="150"
+                  SelectedIndex="0"
+                  SelectionChanged="KeyboardTypeComboBox_SelectionChanged">
+          <ComboBoxItem Content="全键盘" Tag="All" />
+          <ComboBoxItem Content="数字键盘" Tag="Number" />
+        </ComboBox>
+      </StackPanel>
       <TextBox Height="30" Margin="0,0,0,10" />
       <PasswordBox Height="30" />
     </StackPanel>

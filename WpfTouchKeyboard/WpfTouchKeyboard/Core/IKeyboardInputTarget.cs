@@ -1,6 +1,6 @@
 ﻿namespace WpfTouchKeyboard.Core
 {
-    public interface IKeyboardInputTarget
+    internal interface IKeyboardInputTarget
     {
         void InsertText(string text);
         void Backspace();

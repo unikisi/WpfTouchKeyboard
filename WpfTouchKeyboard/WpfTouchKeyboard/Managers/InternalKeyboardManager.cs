@@ -9,10 +9,13 @@ using WpfTouchKeyboard.Settings;
 
 namespace WpfTouchKeyboard.Managers
 {
-    public class VirtualKeyboardPopupManager
+    internal static class InternalKeyboardManager
     {
-        public static IKeyboardInputTarget CurrentTarget { get; set; }
+        public static bool IsEnabled { get; set; } = true;
+
+        internal static IKeyboardInputTarget? CurrentTarget { get; set; }
         private static Popup _popup = null!;
+        private static KeyboardType _keyboardType = KeyboardType.All;
 
         public static void Register()
         {
@@ -41,58 +44,37 @@ namespace WpfTouchKeyboard.Managers
                 new KeyEventHandler(OnWindowKeyDown));
         }
 
-        private static void OnWindowMouseDown(object sender, MouseButtonEventArgs e)
+        public static void SetKeyboardType(KeyboardType type)
         {
-            if (_popup?.IsOpen != true || _popup.Child == null)
-                return;
-
-            if (e.OriginalSource is DependencyObject clickedElement)
-            {
-                // 判断点击是否在 popup 内部
-                bool isInsidePopup = IsDescendantOf(clickedElement, _popup.Child);
-                if (!isInsidePopup)
-                {
-                    _popup.IsOpen = false;
-                    CurrentTarget = null!;
-                }
-            }
+            _keyboardType = type;
+            ResetKeyboardPopup();
         }
 
-        private static void OnWindowKeyDown(object sender, KeyEventArgs e)
+        private static void ResetKeyboardPopup()
         {
-            if (_popup.IsOpen && e.Key == Key.Escape)
+            if (_popup != null)
             {
                 _popup.IsOpen = false;
+                _popup.Child = null;
+                _popup = null!;
                 CurrentTarget = null!;
             }
         }
 
-        private static bool IsDescendantOf(DependencyObject source, DependencyObject target)
+        private static void AttachTo(IKeyboardInputTarget inputTarget)
         {
-            while (source != null)
-            {
-                if (source == target)
-                    return true;
-                source = VisualTreeHelper.GetParent(source);
-            }
-            return false;
-        }
-
-        public static void AttachTo(IKeyboardInputTarget inputTarget)
-        {
-            if (!AppSettings.IsEnabled)
+            if (!IsEnabled)
                 return;
 
             if (_popup?.IsOpen == true && CurrentTarget == inputTarget)
                 return;
 
-
             if (_popup == null)
             {
-                FrameworkElement keyboardContent = AppSettings.KeyboardType switch
+                FrameworkElement keyboardContent = _keyboardType switch
                 {
-                    KeyboardType.All => new FullKeyboardView { },
-                    KeyboardType.Number => new NumericKeyboardView { },
+                    KeyboardType.All => new FullKeyboardView(),
+                    KeyboardType.Number => new NumericKeyboardView(),
                     _ => throw new ArgumentOutOfRangeException()
                 };
 
@@ -123,9 +105,41 @@ namespace WpfTouchKeyboard.Managers
                 _popup.PlacementTarget = element;
                 _popup.IsOpen = true;
 
-                // 重新获取焦点
                 (element as Control)?.Focus();
             }
+        }
+
+        private static void OnWindowMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_popup?.IsOpen != true || _popup.Child == null)
+                return;
+
+            if (e.OriginalSource is DependencyObject clickedElement &&
+                !IsDescendantOf(clickedElement, _popup.Child))
+            {
+                _popup.IsOpen = false;
+                CurrentTarget = null!;
+            }
+        }
+
+        private static void OnWindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_popup?.IsOpen == true && e.Key == Key.Escape)
+            {
+                _popup.IsOpen = false;
+                CurrentTarget = null!;
+            }
+        }
+
+        private static bool IsDescendantOf(DependencyObject source, DependencyObject target)
+        {
+            while (source != null)
+            {
+                if (source == target)
+                    return true;
+                source = VisualTreeHelper.GetParent(source);
+            }
+            return false;
         }
 
         private static UIElement GetUIElement(IKeyboardInputTarget target)

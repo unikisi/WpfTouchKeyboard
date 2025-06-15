@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using WpfTouchKeyboard.Managers;
 using WpfTouchKeyboard.Settings;
 
 namespace WpfTouchKeyboard.Test;
@@ -16,11 +17,30 @@ public partial class MainWindow : Window
 
     private void ToggleKeyboard_Click(object sender, RoutedEventArgs e)
     {
-        AppSettings.IsEnabled = !AppSettings.IsEnabled;
+        KeyboardManager.IsEnabled = !KeyboardManager.IsEnabled;
 
         if (sender is Button btn)
         {
-            btn.Content = AppSettings.IsEnabled ? "关闭虚拟键盘" : "开启虚拟键盘";
+            btn.Content = KeyboardManager.IsEnabled ? "关闭虚拟键盘" : "开启虚拟键盘";
+        }
+    }
+
+    private void KeyboardTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (KeyboardTypeComboBox.SelectedItem is ComboBoxItem selectedItem)
+        {
+            string keyboardType = selectedItem.Tag?.ToString();
+            switch (keyboardType)
+            {
+                case "All":
+                    KeyboardManager.SetKeyboardType(KeyboardType.All);
+                    break;
+                case "Number":
+                    KeyboardManager.SetKeyboardType(KeyboardType.Number);
+                    break;
+            }
+
+            MessageBox.Show($"已切换为：{keyboardType} 键盘");
         }
     }
 }
