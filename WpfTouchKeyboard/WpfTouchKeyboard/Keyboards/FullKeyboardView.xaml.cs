@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WpfTouchKeyboard.Core;
 using WpfTouchKeyboard.Managers;
 
 namespace WpfTouchKeyboard.Keyboards
@@ -43,30 +44,27 @@ namespace WpfTouchKeyboard.Keyboards
                 return;
             }
 
-            if (VirtualKeyboardPopupManager.CurrentTarget is not { } tb)
+            if (VirtualKeyboardPopupManager.CurrentTarget is not { } inputTarget)
                 return;
-
-            var caretIndex = tb.CaretIndex;
 
             if (key == "Back")
             {
-                if (caretIndex > 0)
-                {
-                    tb.Text = tb.Text.Remove(caretIndex - 1, 1);
-                    tb.CaretIndex = caretIndex - 1;
-                }
+                inputTarget.Backspace();
             }
             else
             {
                 var valueToInsert = key;
 
                 if (_shiftSymbols.TryGetValue(key, out var symbol) && _isShifted)
+                {
                     valueToInsert = symbol;
+                }
                 else if (char.IsLetter(key[0]))
+                {
                     valueToInsert = (_isCapsLocked ^ _isShifted) ? key.ToUpper() : key.ToLower();
+                }
 
-                tb.Text = tb.Text.Insert(caretIndex, valueToInsert);
-                tb.CaretIndex = caretIndex + valueToInsert.Length;
+                inputTarget.InsertText(valueToInsert);
 
                 if (_isShifted)
                 {

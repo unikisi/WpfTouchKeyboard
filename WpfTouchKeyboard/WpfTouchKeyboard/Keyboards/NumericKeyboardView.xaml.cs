@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
+using WpfTouchKeyboard.Core;
 using WpfTouchKeyboard.Managers;
 
 namespace WpfTouchKeyboard.Keyboards
@@ -20,31 +21,21 @@ namespace WpfTouchKeyboard.Keyboards
 
         public static void SendKey(string key)
         {
-            var tb = VirtualKeyboardPopupManager.CurrentTarget;
-
-            if (!tb.IsFocused)
+            if (VirtualKeyboardPopupManager.CurrentTarget is not { } target)
                 return;
-
-            var caretIndex = tb.CaretIndex;
-            var text = tb.Text;
 
             switch (key)
             {
                 case "Back":
-                    if (caretIndex > 0)
-                    {
-                        tb.Text = text.Remove(caretIndex - 1, 1);
-                        tb.CaretIndex = caretIndex - 1;
-                    }
+                    target.Backspace();
                     break;
+
                 case "Space":
-                    tb.Text = text.Insert(caretIndex, " ");
-                    tb.CaretIndex = caretIndex + 1;
+                    target.InsertText(" ");
                     break;
 
                 default:
-                    tb.Text = text.Insert(caretIndex, key);
-                    tb.CaretIndex = caretIndex + key.Length;
+                    target.InsertText(key);
                     break;
             }
         }

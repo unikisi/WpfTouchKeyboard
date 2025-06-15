@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using WpfTouchKeyboard.Core;
 using WpfTouchKeyboard.Keyboards;
 using WpfTouchKeyboard.Settings;
 
@@ -10,7 +11,7 @@ namespace WpfTouchKeyboard.Managers
 {
     public class VirtualKeyboardPopupManager
     {
-        public static TextBox CurrentTarget { get; set; } = null!;
+        public static IKeyboardInputTarget CurrentTarget { get; set; }
         private static Popup _popup = null!;
 
         public static void Register()
@@ -20,10 +21,15 @@ namespace WpfTouchKeyboard.Managers
                 new MouseButtonEventHandler((sender, e) =>
                 {
                     if (sender is TextBox tb)
-                    {
-                        e.Handled = false; // 不拦截事件
-                        AttachTo(tb);
-                    }
+                        AttachTo(new TextBoxInputTarget(tb));
+                }));
+
+            EventManager.RegisterClassHandler(typeof(PasswordBox),
+                UIElement.PreviewMouseDownEvent,
+                new MouseButtonEventHandler((sender, e) =>
+                {
+                    if (sender is PasswordBox pb)
+                        AttachTo(new PasswordBoxInputTarget(pb));
                 }));
 
             EventManager.RegisterClassHandler(typeof(Window),
@@ -72,30 +78,28 @@ namespace WpfTouchKeyboard.Managers
             return false;
         }
 
-        public static void AttachTo(TextBox textBox)
+        public static void AttachTo(IKeyboardInputTarget inputTarget)
         {
             if (!AppSettings.IsEnabled)
                 return;
 
-            if (_popup?.IsOpen == true && CurrentTarget == textBox)
+            if (_popup?.IsOpen == true && CurrentTarget == inputTarget)
                 return;
 
 
             if (_popup == null)
             {
-                FrameworkElement keyboardContent;
-                if (AppSettings.UseFullKeyboard == KeyboardType.All)
-                    keyboardContent = new FullKeyboardView { };
-                else
+                FrameworkElement keyboardContent = AppSettings.UseFullKeyboard switch
                 {
-                    keyboardContent = new NumericKeyboardView { };
-                }
+                    KeyboardType.All => new FullKeyboardView { },
+                    KeyboardType.Number => new NumericKeyboardView { },
+                    _ => throw new ArgumentOutOfRangeException()
+                };
 
                 _popup = new Popup
                 {
                     StaysOpen = true,
                     AllowsTransparency = true,
-                    PlacementTarget = textBox,
                     Placement = PlacementMode.Bottom,
                     VerticalOffset = 10,
                     Child = new Border
@@ -110,15 +114,28 @@ namespace WpfTouchKeyboard.Managers
                 };
             }
 
-            if (CurrentTarget != textBox)
+            if (CurrentTarget != inputTarget)
             {
                 _popup.IsOpen = false;
-                CurrentTarget = textBox;
-                _popup.PlacementTarget = textBox;
-                _popup.IsOpen = true;
-            }
+                CurrentTarget = inputTarget;
 
-            textBox.Focus();
+                var element = GetUIElement(inputTarget);
+                _popup.PlacementTarget = element;
+                _popup.IsOpen = true;
+
+                // 重新获取焦点
+                (element as Control)?.Focus();
+            }
+        }
+
+        private static UIElement GetUIElement(IKeyboardInputTarget target)
+        {
+            return target switch
+            {
+                TextBoxInputTarget t => t.Target,
+                PasswordBoxInputTarget p => p.Target,
+                _ => null
+            };
         }
     }
 }

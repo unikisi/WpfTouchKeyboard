@@ -2,7 +2,7 @@
 {
     public class AppSettings
     {
-        public static KeyboardType UseFullKeyboard { get; set; } = KeyboardType.Number;
+        public static KeyboardType UseFullKeyboard { get; set; } = KeyboardType.All;
 
         public static bool IsEnabled { get; set; } = true;
     }
