@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="WpfTouchKeyboard.Keyboards.NumericKeyboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/KeyboardStyle.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Border Background="White"
+          BorderBrush="Gray"
+          BorderThickness="1"
+          CornerRadius="6"
+          Padding="10">
+    <UniformGrid Rows="4" Columns="3">
+      <Button Content="1" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="1" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="2" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="2" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="3" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="3" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="4" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="4" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="5" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="5" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="6" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="6" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="7" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="7" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="8" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="8" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="9" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="9" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="." Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="." Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="0" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="0" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+      <Button Content="⌫" Command="{Binding KeyPressCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="Back" Style="{DynamicResource VirtualKeyButtonStyle}" Focusable="False" />
+    </UniformGrid>
+  </Border>
+</UserControl>
