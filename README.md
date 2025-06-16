@@ -37,3 +37,9 @@ KeyboardManager.Register();
 KeyboardManager.IsEnabled = true;
 KeyboardManager.SetKeyboardType(KeyboardType.All); // or KeyboardType.Number
 ```
+
+
+![Keyboard Screenshot](WpfTouchKeyboard/WpfTouchKeyboard/Assets/all.png)
+
+
+![Keyboard Screenshot](WpfTouchKeyboard/WpfTouchKeyboard/Assets/number.png)
