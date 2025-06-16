@@ -22,7 +22,7 @@ It supports both full alphanumeric keyboards and numeric-only keyboards, and is 
 ### 1. Install via NuGet
 
 ```bash
-dotnet add package WpfTouchKeyboard
+dotnet add package WpfSimpleTouchKeyboard
 ```
 
 ### 2. Register the keyboard on app startup
