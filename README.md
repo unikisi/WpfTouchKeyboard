@@ -1,2 +1,39 @@
-# WpfTouchKeyboard
-**WpfTouchKeyboard** is a lightweight and easy-to-use on-screen keyboard library for WPF applications. It supports both numeric and full QWERTY keyboard layouts and is ideal for touch-enabled devices or kiosk-style interfaces.
+# 📦 WpfTouchKeyboard
+
+**WpfTouchKeyboard** is a lightweight, customizable on-screen virtual keyboard for WPF applications.
+
+It supports both full alphanumeric keyboards and numeric-only keyboards, and is ideal for touch devices, kiosks, or password input scenarios.
+
+---
+
+## ✨ Features
+
+- 🧩 Plug-and-play: just call `Register()` to enable support
+- ⌨️ Supports full and numeric keyboard layouts
+- 🔐 Secure PasswordBox support
+- 🖱️ Automatically opens on focus of `TextBox` or `PasswordBox`
+- 🔁 Switch keyboard type at runtime
+- 🎨 Easy to style with XAML
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install via NuGet
+
+```bash
+dotnet add package WpfTouchKeyboard
+```
+
+### 2. Register the keyboard on app startup
+
+```bash
+KeyboardManager.Register();
+```
+
+### 3. Register the keyboard on app startup
+
+```bash
+KeyboardManager.IsEnabled = true;
+KeyboardManager.SetKeyboardType(KeyboardType.All); // or KeyboardType.Number
+```
