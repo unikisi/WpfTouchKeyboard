@@ -24,7 +24,13 @@ namespace WpfTouchKeyboard.Managers
                 new MouseButtonEventHandler((sender, e) =>
                 {
                     if (sender is TextBox tb)
-                        AttachTo(new TextBoxInputTarget(tb));
+                    {
+                        // 检查附加属性，如果为 false 则不启用键盘
+                        if (KeyboardManager.GetEnableKeyboard(tb))
+                        {
+                            AttachTo(new TextBoxInputTarget(tb));
+                        }
+                    }
                 }));
 
             EventManager.RegisterClassHandler(typeof(PasswordBox),
@@ -32,7 +38,13 @@ namespace WpfTouchKeyboard.Managers
                 new MouseButtonEventHandler((sender, e) =>
                 {
                     if (sender is PasswordBox pb)
-                        AttachTo(new PasswordBoxInputTarget(pb));
+                    {
+                        // 检查附加属性，如果为 false 则不启用键盘
+                        if (KeyboardManager.GetEnableKeyboard(pb))
+                        {
+                            AttachTo(new PasswordBoxInputTarget(pb));
+                        }
+                    }
                 }));
 
             EventManager.RegisterClassHandler(typeof(Window),

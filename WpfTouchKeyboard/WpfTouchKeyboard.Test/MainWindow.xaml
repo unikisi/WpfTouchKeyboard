@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTouchKeyboard.Test"
+        xmlns:keyboard="clr-namespace:WpfTouchKeyboard.Managers;assembly=WpfTouchKeyboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="800">
   <Grid>
     <StackPanel Margin="20">
       <Button Content="切换虚拟键盘开关"
@@ -23,8 +24,18 @@
           <ComboBoxItem Content="数字键盘" Tag="Number" />
         </ComboBox>
       </StackPanel>
-      <TextBox Height="30" Margin="0,0,0,10" />
-      <PasswordBox Height="30" />
+      
+      <TextBlock Text="使用虚拟键盘的 TextBox（默认）" Margin="0,0,0,5" FontWeight="Bold"/>
+      <TextBox Height="30" Margin="0,0,0,20" />
+      
+      <TextBlock Text="不使用虚拟键盘的 TextBox（EnableKeyboard=False）" Margin="0,0,0,5" FontWeight="Bold"/>
+      <TextBox Height="30" keyboard:KeyboardManager.EnableKeyboard="False" Margin="0,0,0,20" />
+      
+      <TextBlock Text="使用虚拟键盘的 PasswordBox（默认）" Margin="0,0,0,5" FontWeight="Bold"/>
+      <PasswordBox Height="30" Margin="0,0,0,20" />
+      
+      <TextBlock Text="不使用虚拟键盘的 PasswordBox（EnableKeyboard=False）" Margin="0,0,0,5" FontWeight="Bold"/>
+      <PasswordBox Height="30" keyboard:KeyboardManager.EnableKeyboard="False" />
     </StackPanel>
   </Grid>
 </Window>
