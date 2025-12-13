@@ -38,6 +38,14 @@ KeyboardManager.IsEnabled = true;
 KeyboardManager.SetKeyboardType(KeyboardType.All); // or KeyboardType.Number
 ```
 
+### 4. Disable the virtual keyboard for specific TextBox controls
+When you do not want the virtual keyboard to be activated for certain TextBox controls, you can disable it by setting the following attached property:
+
+```bash
+<TextBox keyboard:KeyboardManager.EnableKeyboard="False" />
+```
+
+Sample:
 
 ![Keyboard Screenshot](WpfTouchKeyboard/WpfTouchKeyboard/Assets/all.png)
 
