@@ -11,7 +11,7 @@
     <Description>WpfTouchKeyboard is a lightweight and easy-to-use on-screen keyboard library for WPF applications. It supports both numeric and full QWERTY keyboard layouts and is ideal for touch-enabled devices or kiosk-style interfaces.</Description>
     <Copyright>Cass Fan</Copyright>
     <PackageId>WPFSimpleTouchKeyboard</PackageId>
-	  <VersionPrefix>1.0.4</VersionPrefix>
+	  <VersionPrefix>1.0.5</VersionPrefix>
   </PropertyGroup>
 
 </Project>
