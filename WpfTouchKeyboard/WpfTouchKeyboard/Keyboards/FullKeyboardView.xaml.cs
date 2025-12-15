@@ -28,6 +28,11 @@ namespace WpfTouchKeyboard.Keyboards
             // 初始化按钮样式为英文模式
             LanguageToggleButton.Background = new SolidColorBrush(Color.FromRgb(0x21, 0x96, 0xF3));
             LanguageToggleButton.Foreground = new SolidColorBrush(Colors.White);
+            
+            // 根据全局属性控制按钮可见性
+            LanguageToggleButton.Visibility = KeyboardManager.ShowLanguageToggleButton 
+                ? Visibility.Visible 
+                : Visibility.Collapsed;
         }
 
         private void Key_Click(object sender, RoutedEventArgs e)

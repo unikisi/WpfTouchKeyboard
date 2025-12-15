@@ -24,6 +24,12 @@ namespace WpfTouchKeyboard.Managers
         public static bool GlobalDefaultEnabled { get; set; } = true;
 
         /// <summary>
+        /// 获取或设置是否显示键盘上的中英切换按钮。
+        /// 默认值为 false（隐藏）。设置为 true 时，键盘上会显示中英切换按钮。
+        /// </summary>
+        public static bool ShowLanguageToggleButton { get; set; } = false;
+
+        /// <summary>
         /// Registers keyboard support. Should be called once during application startup.
         /// </summary>
         public static void Register()
