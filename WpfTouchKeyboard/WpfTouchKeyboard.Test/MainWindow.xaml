@@ -6,37 +6,70 @@
         xmlns:local="clr-namespace:WpfTouchKeyboard.Test"
         xmlns:keyboard="clr-namespace:WpfTouchKeyboard.Managers;assembly=WpfTouchKeyboard"
         mc:Ignorable="d"
-        keyboard:KeyboardManager.EnableKeyboardForWindow="True"
         Title="MainWindow" Height="550" Width="800">
   <Grid>
-    <StackPanel Margin="20">
-      <Button Content="切换虚拟键盘开关"
-              Width="200"
-              Height="30"
-              Margin="0,0,0,20"
-              Click="ToggleKeyboard_Click" />
-      <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-        <TextBlock Text="键盘类型：" VerticalAlignment="Center" Margin="0,0,10,0"/>
-        <ComboBox x:Name="KeyboardTypeComboBox"
-                  Width="150"
-                  SelectedIndex="0"
-                  SelectionChanged="KeyboardTypeComboBox_SelectionChanged">
-          <ComboBoxItem Content="全键盘" Tag="All" />
-          <ComboBoxItem Content="数字键盘" Tag="Number" />
-        </ComboBox>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <StackPanel Margin="20">
+        <Button Content="切换虚拟键盘开关"
+                Width="200"
+                Height="30"
+                Margin="0,0,0,20"
+                Click="ToggleKeyboard_Click" />
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+          <TextBlock Text="键盘类型：" VerticalAlignment="Center" Margin="0,0,10,0"/>
+          <ComboBox x:Name="KeyboardTypeComboBox"
+                    Width="150"
+                    SelectedIndex="0"
+                    SelectionChanged="KeyboardTypeComboBox_SelectionChanged">
+            <ComboBoxItem Content="全键盘" Tag="All" />
+            <ComboBoxItem Content="数字键盘" Tag="Number" />
+          </ComboBox>
+        </StackPanel>
+        
+        <!-- Window 级别的测试 -->
+        <Border BorderBrush="Gray" 
+                BorderThickness="2" 
+                CornerRadius="5" 
+                Padding="10" 
+                Margin="0,0,0,20"
+                Background="#F5F5F5">
+          <StackPanel>
+            <TextBlock Text="Window 级别测试区域" 
+                       FontSize="14" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,10"/>
+            
+            <TextBlock Text="使用虚拟键盘的 TextBox（默认）" Margin="0,0,0,5" FontWeight="Bold"/>
+            <TextBox Height="30" Margin="0,0,0,20" />
+            
+            <TextBlock Text="不使用虚拟键盘的 TextBox（EnableKeyboard=False）" Margin="0,0,0,5" FontWeight="Bold"/>
+            <TextBox Height="30" keyboard:KeyboardManager.EnableKeyboard="False" Margin="0,0,0,20" />
+            
+            <TextBlock Text="使用虚拟键盘的 PasswordBox（默认）" Margin="0,0,0,5" FontWeight="Bold"/>
+            <PasswordBox Height="30" Margin="0,0,0,20" />
+            
+            <TextBlock Text="不使用虚拟键盘的 PasswordBox（EnableKeyboard=False）" Margin="0,0,0,5" FontWeight="Bold"/>
+            <PasswordBox Height="30" keyboard:KeyboardManager.EnableKeyboard="False" />
+          </StackPanel>
+        </Border>
+        
+        <!-- UserControl 级别的测试 -->
+        <Border BorderBrush="Blue" 
+                BorderThickness="2" 
+                CornerRadius="5" 
+                Padding="10" 
+                Margin="0,0,0,20"
+                Background="#E3F2FD">
+          <StackPanel>
+            <TextBlock Text="UserControl 级别测试区域" 
+                       FontSize="14" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,10"
+                       Foreground="Blue"/>
+            <local:TestUserControl />
+          </StackPanel>
+        </Border>
       </StackPanel>
-      
-      <TextBlock Text="使用虚拟键盘的 TextBox（默认）" Margin="0,0,0,5" FontWeight="Bold"/>
-      <TextBox Height="30" Margin="0,0,0,20" />
-      
-      <TextBlock Text="不使用虚拟键盘的 TextBox（EnableKeyboard=False）" Margin="0,0,0,5" FontWeight="Bold"/>
-      <TextBox Height="30" keyboard:KeyboardManager.EnableKeyboard="False" Margin="0,0,0,20" />
-      
-      <TextBlock Text="使用虚拟键盘的 PasswordBox（默认）" Margin="0,0,0,5" FontWeight="Bold"/>
-      <PasswordBox Height="30" Margin="0,0,0,20" />
-      
-      <TextBlock Text="不使用虚拟键盘的 PasswordBox（EnableKeyboard=False）" Margin="0,0,0,5" FontWeight="Bold"/>
-      <PasswordBox Height="30" keyboard:KeyboardManager.EnableKeyboard="False" />
-    </StackPanel>
+    </ScrollViewer>
   </Grid>
 </Window>
