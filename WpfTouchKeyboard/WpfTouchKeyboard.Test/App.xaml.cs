@@ -13,7 +13,6 @@ public partial class App : Application
         base.OnStartup(e);
 
         KeyboardManager.Register();
-        KeyboardManager.GlobalDefaultEnabled = false;
     }
 }
 

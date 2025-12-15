@@ -25,6 +25,9 @@ namespace WpfTouchKeyboard.Keyboards
         public FullKeyboardView()
         {
             InitializeComponent();
+            // 初始化按钮样式为英文模式
+            LanguageToggleButton.Background = new SolidColorBrush(Color.FromRgb(0x21, 0x96, 0xF3));
+            LanguageToggleButton.Foreground = new SolidColorBrush(Colors.White);
         }
 
         private void Key_Click(object sender, RoutedEventArgs e)
@@ -231,7 +234,9 @@ namespace WpfTouchKeyboard.Keyboards
             if (_isChineseMode)
             {
                 LanguageToggleButton.Content = "中";
+                // 中文模式：绿色背景，白色文字
                 LanguageToggleButton.Background = new SolidColorBrush(Color.FromRgb(0x4C, 0xAF, 0x50));
+                LanguageToggleButton.Foreground = new SolidColorBrush(Colors.White);
                 
                 // 切换系统输入法到中文（类似 Win+空格的效果）
                 ImeHelper.SwitchToChineseInput();
@@ -252,7 +257,9 @@ namespace WpfTouchKeyboard.Keyboards
             else
             {
                 LanguageToggleButton.Content = "英";
+                // 英文模式：蓝色背景，白色文字
                 LanguageToggleButton.Background = new SolidColorBrush(Color.FromRgb(0x21, 0x96, 0xF3));
+                LanguageToggleButton.Foreground = new SolidColorBrush(Colors.White);
                 
                 // 切换系统输入法到英文（类似 Win+空格的效果）
                 ImeHelper.SwitchToEnglishInput();
