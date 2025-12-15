@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfTouchKeyboard.Test"
         xmlns:keyboard="clr-namespace:WpfTouchKeyboard.Managers;assembly=WpfTouchKeyboard"
         mc:Ignorable="d"
+        keyboard:KeyboardManager.EnableKeyboardForWindow="True"
         Title="MainWindow" Height="550" Width="800">
   <Grid>
     <StackPanel Margin="20">

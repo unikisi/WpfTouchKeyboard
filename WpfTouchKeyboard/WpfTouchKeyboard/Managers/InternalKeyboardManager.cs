@@ -173,17 +173,60 @@ namespace WpfTouchKeyboard.Managers
         }
 
         /// <summary>
-        /// 检查指定控件所在的窗口是否启用了虚拟键盘
+        /// 检查指定控件所在的窗口/视图是否启用了虚拟键盘
+        /// 优先级：View > Window > GlobalDefault
         /// </summary>
         private static bool IsKeyboardEnabledForWindow(DependencyObject element)
         {
-            // 向上查找窗口
-            var window = Window.GetWindow(element);
-            if (window == null)
-                return false;
+            // 1. 先向上查找 UserControl 或 Page（视图级别）
+            var view = FindAncestor<FrameworkElement>(element, 
+                e => e is System.Windows.Controls.UserControl || e is System.Windows.Controls.Page);
+            if (view != null)
+            {
+                var viewValue = KeyboardManager.IsKeyboardEnabledForView(view);
+                if (viewValue.HasValue)
+                {
+                    // 视图明确设置了值，使用视图的值
+                    return viewValue.Value;
+                }
+            }
 
-            // 检查窗口是否启用了键盘（考虑全局默认值）
-            return KeyboardManager.IsKeyboardEnabledForWindow(window);
+            // 2. 向上查找窗口（窗口级别）
+            var window = Window.GetWindow(element);
+            if (window != null)
+            {
+                var windowValue = KeyboardManager.GetEnableKeyboardForWindow(window);
+                if (windowValue.HasValue)
+                {
+                    // 窗口明确设置了值，使用窗口的值
+                    return windowValue.Value;
+                }
+                // 窗口没有设置值，使用全局默认值
+                return KeyboardManager.GlobalDefaultEnabled;
+            }
+
+            // 3. 如果找不到窗口（可能是在设计时或特殊场景），使用全局默认值
+            return KeyboardManager.GlobalDefaultEnabled;
+        }
+
+        /// <summary>
+        /// 向上查找指定类型的祖先元素
+        /// </summary>
+        private static T? FindAncestor<T>(DependencyObject element, Func<T, bool>? predicate = null) where T : DependencyObject
+        {
+            var current = VisualTreeHelper.GetParent(element);
+            while (current != null)
+            {
+                if (current is T t)
+                {
+                    if (predicate == null || predicate(t))
+                    {
+                        return t;
+                    }
+                }
+                current = VisualTreeHelper.GetParent(current);
+            }
+            return null;
         }
     }
 }

@@ -104,6 +104,40 @@ namespace WpfTouchKeyboard.Managers
         }
 
         /// <summary>
+        /// 附加属性：控制该视图（UserControl/Page）是否启用虚拟键盘。
+        /// 默认值为 null（使用窗口或全局默认值）。
+        /// 设置为 true 时，该视图内的所有控件（除非单独设置为 false）将显示虚拟键盘。
+        /// 设置为 false 时，该视图禁用虚拟键盘（即使窗口或全局默认启用）。
+        /// 优先级：View > Window > GlobalDefault
+        /// </summary>
+        public static readonly DependencyProperty EnableKeyboardForViewProperty =
+            DependencyProperty.RegisterAttached(
+                "EnableKeyboardForView",
+                typeof(bool?),
+                typeof(KeyboardManager),
+                new PropertyMetadata(null));
+
+        /// <summary>
+        /// 获取指定视图的 EnableKeyboardForView 属性值。
+        /// </summary>
+        /// <param name="element">要获取属性的视图元素（UserControl 或 Page）</param>
+        /// <returns>如果为 true，则在该视图启用虚拟键盘；如果为 false，则禁用虚拟键盘；如果为 null，则使用窗口或全局默认值</returns>
+        public static bool? GetEnableKeyboardForView(FrameworkElement element)
+        {
+            return (bool?)element.GetValue(EnableKeyboardForViewProperty);
+        }
+
+        /// <summary>
+        /// 设置指定视图的 EnableKeyboardForView 属性值。
+        /// </summary>
+        /// <param name="element">要设置属性的视图元素（UserControl 或 Page）</param>
+        /// <param name="value">如果为 true，则在该视图启用虚拟键盘；如果为 false，则禁用虚拟键盘；如果为 null，则使用窗口或全局默认值</param>
+        public static void SetEnableKeyboardForView(FrameworkElement element, bool? value)
+        {
+            element.SetValue(EnableKeyboardForViewProperty, value);
+        }
+
+        /// <summary>
         /// 检查指定窗口是否启用了虚拟键盘（考虑全局默认值）
         /// </summary>
         internal static bool IsKeyboardEnabledForWindow(Window window)
@@ -111,6 +145,14 @@ namespace WpfTouchKeyboard.Managers
             var windowValue = GetEnableKeyboardForWindow(window);
             // 如果窗口明确设置了值，使用窗口的值；否则使用全局默认值
             return windowValue ?? GlobalDefaultEnabled;
+        }
+
+        /// <summary>
+        /// 检查指定视图是否启用了虚拟键盘（考虑窗口和全局默认值）
+        /// </summary>
+        internal static bool? IsKeyboardEnabledForView(FrameworkElement view)
+        {
+            return GetEnableKeyboardForView(view);
         }
     }
 }
