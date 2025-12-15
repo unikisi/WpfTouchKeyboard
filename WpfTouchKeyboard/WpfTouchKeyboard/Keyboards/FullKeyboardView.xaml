@@ -63,6 +63,7 @@
       <Button Content="N" Tag="N" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="M" Tag="M" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="␣" Tag=" " Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="200"/>
+      <Button Content="↵" Tag="Enter" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="90"/>
     </StackPanel>
   </StackPanel>
 </UserControl>

@@ -4,6 +4,7 @@
     {
         void InsertText(string text);
         void Backspace();
+        void Enter();
         string GetCurrentText();
     }
 }

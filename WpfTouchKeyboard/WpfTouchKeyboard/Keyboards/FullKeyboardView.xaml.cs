@@ -51,6 +51,10 @@ namespace WpfTouchKeyboard.Keyboards
             {
                 inputTarget.Backspace();
             }
+            else if (key == "Enter")
+            {
+                inputTarget.Enter();
+            }
             else
             {
                 var valueToInsert = key;
@@ -80,7 +84,7 @@ namespace WpfTouchKeyboard.Keyboards
             {
                 if (btn.Tag is not string key) continue;
 
-                if (key == "Shift" || key == "CapsLock" || key == "Back" || key == " ")
+                if (key == "Shift" || key == "CapsLock" || key == "Back" || key == " " || key == "Enter")
                     continue;
 
                 if (char.IsLetter(key[0]))

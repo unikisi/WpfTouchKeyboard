@@ -23,6 +23,11 @@ namespace WpfTouchKeyboard.Core
             }
         }
 
+        public void Enter()
+        {
+            // PasswordBox不支持多行，回车键无效果
+        }
+
         public string GetCurrentText()
         {
             return Target.Password;

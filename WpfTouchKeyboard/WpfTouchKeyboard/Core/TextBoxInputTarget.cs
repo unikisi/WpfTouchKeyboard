@@ -29,6 +29,16 @@ namespace WpfTouchKeyboard.Core
             }
         }
 
+        public void Enter()
+        {
+            if (!Target.IsFocused)
+                Target.Focus();
+
+            var caretIndex = Target.CaretIndex;
+            Target.Text = Target.Text.Insert(caretIndex, "\r\n");
+            Target.CaretIndex = caretIndex + 2;
+        }
+
         public string GetCurrentText()
         {
             return Target.Text;
