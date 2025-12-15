@@ -18,6 +18,12 @@ namespace WpfTouchKeyboard.Managers
         }
 
         /// <summary>
+        /// 获取或设置全局默认值：是否在所有窗口默认启用虚拟键盘。
+        /// 默认值为 true（全局启用）。设置为 false 时，需要在特定窗口设置 EnableKeyboardForWindow="True" 才能启用。
+        /// </summary>
+        public static bool GlobalDefaultEnabled { get; set; } = true;
+
+        /// <summary>
         /// Registers keyboard support. Should be called once during application startup.
         /// </summary>
         public static void Register()
@@ -62,6 +68,49 @@ namespace WpfTouchKeyboard.Managers
         public static void SetEnableKeyboard(UIElement element, bool value)
         {
             element.SetValue(EnableKeyboardProperty, value);
+        }
+
+        /// <summary>
+        /// 附加属性：控制该窗口是否启用虚拟键盘。
+        /// 默认值为 null（使用全局默认值 GlobalDefaultEnabled）。
+        /// 设置为 true 时，该窗口内的所有控件（除非单独设置为 false）将显示虚拟键盘。
+        /// 设置为 false 时，该窗口禁用虚拟键盘（即使全局默认启用）。
+        /// </summary>
+        public static readonly DependencyProperty EnableKeyboardForWindowProperty =
+            DependencyProperty.RegisterAttached(
+                "EnableKeyboardForWindow",
+                typeof(bool?),
+                typeof(KeyboardManager),
+                new PropertyMetadata(null));
+
+        /// <summary>
+        /// 获取指定窗口的 EnableKeyboardForWindow 属性值。
+        /// </summary>
+        /// <param name="element">要获取属性的窗口元素</param>
+        /// <returns>如果为 true，则在该窗口启用虚拟键盘；如果为 false，则禁用虚拟键盘；如果为 null，则使用全局默认值</returns>
+        public static bool? GetEnableKeyboardForWindow(Window element)
+        {
+            return (bool?)element.GetValue(EnableKeyboardForWindowProperty);
+        }
+
+        /// <summary>
+        /// 设置指定窗口的 EnableKeyboardForWindow 属性值。
+        /// </summary>
+        /// <param name="element">要设置属性的窗口元素</param>
+        /// <param name="value">如果为 true，则在该窗口启用虚拟键盘；如果为 false，则禁用虚拟键盘；如果为 null，则使用全局默认值</param>
+        public static void SetEnableKeyboardForWindow(Window element, bool? value)
+        {
+            element.SetValue(EnableKeyboardForWindowProperty, value);
+        }
+
+        /// <summary>
+        /// 检查指定窗口是否启用了虚拟键盘（考虑全局默认值）
+        /// </summary>
+        internal static bool IsKeyboardEnabledForWindow(Window window)
+        {
+            var windowValue = GetEnableKeyboardForWindow(window);
+            // 如果窗口明确设置了值，使用窗口的值；否则使用全局默认值
+            return windowValue ?? GlobalDefaultEnabled;
         }
     }
 }

@@ -25,7 +25,11 @@ namespace WpfTouchKeyboard.Managers
                 {
                     if (sender is TextBox tb)
                     {
-                        // 检查附加属性，如果为 false 则不启用键盘
+                        // 检查窗口级别是否启用键盘
+                        if (!IsKeyboardEnabledForWindow(tb))
+                            return;
+
+                        // 检查控件级别是否启用键盘
                         if (KeyboardManager.GetEnableKeyboard(tb))
                         {
                             AttachTo(new TextBoxInputTarget(tb));
@@ -39,7 +43,11 @@ namespace WpfTouchKeyboard.Managers
                 {
                     if (sender is PasswordBox pb)
                     {
-                        // 检查附加属性，如果为 false 则不启用键盘
+                        // 检查窗口级别是否启用键盘
+                        if (!IsKeyboardEnabledForWindow(pb))
+                            return;
+
+                        // 检查控件级别是否启用键盘
                         if (KeyboardManager.GetEnableKeyboard(pb))
                         {
                             AttachTo(new PasswordBoxInputTarget(pb));
@@ -154,7 +162,7 @@ namespace WpfTouchKeyboard.Managers
             return false;
         }
 
-        private static UIElement GetUIElement(IKeyboardInputTarget target)
+        private static UIElement? GetUIElement(IKeyboardInputTarget target)
         {
             return target switch
             {
@@ -162,6 +170,20 @@ namespace WpfTouchKeyboard.Managers
                 PasswordBoxInputTarget p => p.Target,
                 _ => null
             };
+        }
+
+        /// <summary>
+        /// 检查指定控件所在的窗口是否启用了虚拟键盘
+        /// </summary>
+        private static bool IsKeyboardEnabledForWindow(DependencyObject element)
+        {
+            // 向上查找窗口
+            var window = Window.GetWindow(element);
+            if (window == null)
+                return false;
+
+            // 检查窗口是否启用了键盘（考虑全局默认值）
+            return KeyboardManager.IsKeyboardEnabledForWindow(window);
         }
     }
 }
