@@ -38,6 +38,13 @@ When you do not want the virtual keyboard to be activated for certain TextBox co
 <TextBox keyboard:KeyboardManager.EnableKeyboard="False" />
 ```
 
+### 4. Enable Chinese Input
+To enable Chinese input on the virtual keyboard, make sure that a Chinese IME (such as Microsoft Pinyin) is installed and available in the system.
+
+```bash
+KeyboardManager.Register();
+KeyboardManager.ShowLanguageToggleButton = true;
+```
 Sample:
 
 ![Keyboard Screenshot](WpfTouchKeyboard/WpfTouchKeyboard/Assets/all.png)
