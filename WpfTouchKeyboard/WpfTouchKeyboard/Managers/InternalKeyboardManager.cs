@@ -120,23 +120,7 @@ namespace WpfTouchKeyboard.Managers
                 };
                 _closeButton.Click += (s, e) => CloseKeyboard();
                 
-                // 添加悬停效果
-                _closeButton.MouseEnter += (s, e) =>
-                {
-                    if (s is Button btn)
-                    {
-                        btn.Foreground = Brushes.Red;
-                        btn.Background = new SolidColorBrush(Color.FromArgb(30, 255, 0, 0));
-                    }
-                };
-                _closeButton.MouseLeave += (s, e) =>
-                {
-                    if (s is Button btn)
-                    {
-                        btn.Foreground = Brushes.Gray;
-                        btn.Background = Brushes.Transparent;
-                    }
-                };
+                // 移除悬停效果，保持透明背景
 
                 // 创建包含键盘和关闭按钮的 Grid
                 var grid = new Grid();

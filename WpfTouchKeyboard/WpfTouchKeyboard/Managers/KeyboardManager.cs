@@ -38,8 +38,14 @@ namespace WpfTouchKeyboard.Managers
         /// <summary>
         /// Registers keyboard support. Should be called once during application startup.
         /// </summary>
-        public static void Register()
+        /// <param name="globalDefaultEnabled">是否在所有窗口默认启用虚拟键盘。默认值为 true。</param>
+        /// <param name="showCloseButton">是否显示键盘右上角的关闭按钮。默认值为 false。</param>
+        /// <param name="showLanguageToggleButton">是否显示键盘上的中英切换按钮。默认值为 false。</param>
+        public static void Register(bool globalDefaultEnabled = true, bool showCloseButton = false, bool showLanguageToggleButton = false)
         {
+            GlobalDefaultEnabled = globalDefaultEnabled;
+            ShowCloseButton = showCloseButton;
+            ShowLanguageToggleButton = showLanguageToggleButton;
             InternalKeyboardManager.Register();
         }
 

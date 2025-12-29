@@ -12,9 +12,11 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        KeyboardManager.Register();
-        KeyboardManager.GlobalDefaultEnabled = true;
-        KeyboardManager.ShowCloseButton = true;
+        KeyboardManager.Register(
+            globalDefaultEnabled: true,
+            showCloseButton: true,
+            showLanguageToggleButton: true
+        );
     }
 }
 
