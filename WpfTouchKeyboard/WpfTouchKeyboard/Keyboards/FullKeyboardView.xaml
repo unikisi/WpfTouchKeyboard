@@ -52,7 +52,7 @@
       <Button Content="J" Tag="J" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="K" Tag="K" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="L" Tag="L" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
-      <Button Content="↵" Tag="Enter" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="90"/>
+      <Button Content="Enter ↵" Tag="Enter" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="150" FontSize="24"/>
     </StackPanel>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
