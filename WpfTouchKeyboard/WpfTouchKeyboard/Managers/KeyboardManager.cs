@@ -30,6 +30,12 @@ namespace WpfTouchKeyboard.Managers
         public static bool ShowLanguageToggleButton { get; set; } = false;
 
         /// <summary>
+        /// 获取或设置是否显示键盘右上角的关闭按钮。
+        /// 默认值为 false（隐藏）。设置为 true 时，键盘右上角会显示关闭按钮（×）。
+        /// </summary>
+        public static bool ShowCloseButton { get; set; } = false;
+
+        /// <summary>
         /// Registers keyboard support. Should be called once during application startup.
         /// </summary>
         public static void Register()
