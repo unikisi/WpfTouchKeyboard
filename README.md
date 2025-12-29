@@ -38,6 +38,31 @@ When you do not want the virtual keyboard to be activated for certain TextBox co
 <TextBox keyboard:KeyboardManager.EnableKeyboard="False" />
 ```
 
+### 4. Disable Globally and Enable per Page (XAML)
+You can disable the virtual keyboard globally (for the entire application), and then explicitly enable it only on specific views/pages in XAML.
+
+```bash
+KeyboardManager.Register();
+KeyboardManager.GlobalDefaultEnabled = false;
+```
+UserControl:
+
+```bash
+keyboard:KeyboardManager.EnableKeyboardForView="True"
+```
+
+Windows:
+```bash
+keyboard:KeyboardManager.EnableKeyboard="True"
+```
+
+### 5. Enable Chinese Input
+To enable Chinese input on the virtual keyboard, make sure that a Chinese IME (such as Microsoft Pinyin) is installed and available in the system.
+
+```bash
+KeyboardManager.Register();
+KeyboardManager.ShowLanguageToggleButton = true;
+```
 Sample:
 
 ![Keyboard Screenshot](WpfTouchKeyboard/WpfTouchKeyboard/Assets/all.png)
