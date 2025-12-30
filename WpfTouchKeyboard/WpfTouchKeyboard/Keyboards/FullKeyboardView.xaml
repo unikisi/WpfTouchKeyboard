@@ -10,7 +10,7 @@
     </ResourceDictionary>
   </UserControl.Resources>
 
-  <StackPanel Orientation="Vertical" Margin="10">
+  <StackPanel Orientation="Vertical" Margin="0">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
       <Button Content="`" Tag="`" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" Name="BacktickButton"/>
       <Button Content="1" Tag="1" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>

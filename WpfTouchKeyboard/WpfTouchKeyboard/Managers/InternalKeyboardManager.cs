@@ -109,7 +109,7 @@ namespace WpfTouchKeyboard.Managers
                     Height = 30,
                     HorizontalAlignment = HorizontalAlignment.Right,
                     VerticalAlignment = VerticalAlignment.Top,
-                    Margin = new Thickness(0, -5, -5, 0),
+                    Margin = new Thickness(0, -40, 0, 0),
                     Background = Brushes.Transparent,
                     BorderThickness = new Thickness(0),
                     Foreground = Brushes.Gray,
@@ -133,14 +133,14 @@ namespace WpfTouchKeyboard.Managers
                     StaysOpen = true,
                     AllowsTransparency = true,
                     Placement = PlacementMode.Bottom,
-                    VerticalOffset = 10,
+                    VerticalOffset = 0,
                     Child = new Border
                     {
                         Background = Brushes.LightGray,
                         BorderBrush = Brushes.Gray,
                         BorderThickness = new Thickness(1),
                         CornerRadius = new CornerRadius(6),
-                        Padding = new Thickness(10),
+                        Padding = new Thickness(0, 40, 0, 0),
                         Child = container
                     }
                 };

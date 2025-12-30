@@ -31,17 +31,17 @@ namespace WpfTouchKeyboard.Managers
 
         /// <summary>
         /// 获取或设置是否显示键盘右上角的关闭按钮。
-        /// 默认值为 false（隐藏）。设置为 true 时，键盘右上角会显示关闭按钮（×）。
+        /// 默认值为 true（显示）。设置为 false 时，键盘右上角会隐藏关闭按钮（×）。
         /// </summary>
-        public static bool ShowCloseButton { get; set; } = false;
+        public static bool ShowCloseButton { get; set; } = true;
 
         /// <summary>
         /// Registers keyboard support. Should be called once during application startup.
         /// </summary>
         /// <param name="globalDefaultEnabled">是否在所有窗口默认启用虚拟键盘。默认值为 true。</param>
-        /// <param name="showCloseButton">是否显示键盘右上角的关闭按钮。默认值为 false。</param>
+        /// <param name="showCloseButton">是否显示键盘右上角的关闭按钮。默认值为 true。</param>
         /// <param name="showLanguageToggleButton">是否显示键盘上的中英切换按钮。默认值为 false。</param>
-        public static void Register(bool globalDefaultEnabled = true, bool showCloseButton = false, bool showLanguageToggleButton = false)
+        public static void Register(bool globalDefaultEnabled = true, bool showCloseButton = true, bool showLanguageToggleButton = false)
         {
             GlobalDefaultEnabled = globalDefaultEnabled;
             ShowCloseButton = showCloseButton;

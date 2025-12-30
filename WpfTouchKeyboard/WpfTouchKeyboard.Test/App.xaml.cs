@@ -14,7 +14,6 @@ public partial class App : Application
 
         KeyboardManager.Register(
             globalDefaultEnabled: true,
-            showCloseButton: true,
             showLanguageToggleButton: true
         );
     }
