@@ -5,7 +5,7 @@
     <Setter Property="FontSize" Value="20"/>
     <Setter Property="FontWeight" Value="SemiBold"/>
     <Setter Property="Padding" Value="10"/>
-    <Setter Property="Margin" Value="5"/>
+    <Setter Property="Margin" Value="2"/>
     <Setter Property="MinWidth" Value="60"/>
     <Setter Property="MinHeight" Value="60"/>
     <Setter Property="Background" Value="White"/>
