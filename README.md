@@ -65,7 +65,8 @@ KeyboardManager.ShowLanguageToggleButton = true;
 ```
 Sample:
 
-![Keyboard Screenshot](WpfTouchKeyboard/WpfTouchKeyboard/Assets/all.png)
+<img width="930" height="362" alt="image" src="https://github.com/user-attachments/assets/85f86ccc-bb99-4501-9d62-e9f200b86154" />
+
 
 
 ![Keyboard Screenshot](WpfTouchKeyboard/WpfTouchKeyboard/Assets/number.png)
