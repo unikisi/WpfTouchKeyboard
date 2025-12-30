@@ -136,7 +136,7 @@ namespace WpfTouchKeyboard.Managers
                     VerticalOffset = 10,
                     Child = new Border
                     {
-                        Background = Brushes.White,
+                        Background = Brushes.LightGray,
                         BorderBrush = Brushes.Gray,
                         BorderThickness = new Thickness(1),
                         CornerRadius = new CornerRadius(6),

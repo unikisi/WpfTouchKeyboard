@@ -17,9 +17,10 @@ namespace WpfTouchKeyboard.Keyboards
         private bool _isChineseMode = false;
         private readonly Dictionary<string, string> _shiftSymbols = new()
         {
-            {"1", "!"}, {"2", "@"}, {"3", "#"}, {"4", "$"}, {"5", "%"},
+            {"`", "~"}, {"1", "!"}, {"2", "@"}, {"3", "#"}, {"4", "$"}, {"5", "%"},
             {"6", "^"}, {"7", "&"}, {"8", "*"}, {"9", "("}, {"0", ")"},
-            {"-", "_"}, {"+", "="}
+            {"-", "_"}, {"=", "+"}, {"[", "{"}, {"]", "}"}, {"\\", "|"},
+            {";", ":"}, {"'", "\""}, {",", "<"}, {".", ">"}, {"/", "?"}
         };
 
         public FullKeyboardView()
@@ -87,6 +88,10 @@ namespace WpfTouchKeyboard.Keyboards
             {
                 SendKeyPress(Key.Enter, targetElement);
             }
+            else if (key == "Tab")
+            {
+                SendKeyPress(Key.Tab, targetElement);
+            }
             else if (key == " ")
             {
                 SendKeyPress(Key.Space, targetElement);
@@ -110,11 +115,20 @@ namespace WpfTouchKeyboard.Keyboards
                     }
                     else
                     {
-                        // 符号也通过按键发送
-                        var virtualKey = GetVirtualKeyFromChar(ch);
-                        if (virtualKey.HasValue)
+                        // 处理符号键，包括shift符号
+                        if (key == "`")
                         {
-                            SendKeyPress((Key)virtualKey.Value, targetElement);
+                            var charToSend = _isShifted ? '~' : '`';
+                            SendCharInput(charToSend, targetElement);
+                        }
+                        else
+                        {
+                            // 符号也通过按键发送
+                            var virtualKey = GetVirtualKeyFromChar(ch);
+                            if (virtualKey.HasValue)
+                            {
+                                SendKeyPress((Key)virtualKey.Value, targetElement);
+                            }
                         }
                     }
                 }
@@ -222,6 +236,22 @@ namespace WpfTouchKeyboard.Keyboards
             {
                 '-' => Key.OemMinus,
                 '+' => Key.OemPlus,
+                '[' => Key.OemOpenBrackets,
+                ']' => Key.OemCloseBrackets,
+                '\\' => Key.OemPipe,
+                '{' => Key.OemOpenBrackets,
+                '}' => Key.OemCloseBrackets,
+                '|' => Key.OemPipe,
+                ';' => Key.OemSemicolon,
+                ':' => Key.OemSemicolon,
+                '\'' => Key.OemQuotes,
+                '"' => Key.OemQuotes,
+                ',' => Key.OemComma,
+                '<' => Key.OemComma,
+                '.' => Key.OemPeriod,
+                '>' => Key.OemPeriod,
+                '/' => Key.OemQuestion,
+                '?' => Key.OemQuestion,
                 _ => null
             };
         }
@@ -289,7 +319,7 @@ namespace WpfTouchKeyboard.Keyboards
             {
                 if (btn.Tag is not string key) continue;
 
-                if (key == "Shift" || key == "CapsLock" || key == "Back" || key == " " || key == "Enter")
+                if (key == "Shift" || key == "CapsLock" || key == "Back" || key == " " || key == "Enter" || key == "Tab")
                     continue;
 
                 if (char.IsLetter(key[0]))

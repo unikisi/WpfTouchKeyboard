@@ -12,6 +12,7 @@
 
   <StackPanel Orientation="Vertical" Margin="10">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+      <Button Content="`" Tag="`" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" Name="BacktickButton"/>
       <Button Content="1" Tag="1" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="2" Tag="2" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="3" Tag="3" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
@@ -23,10 +24,12 @@
       <Button Content="9" Tag="9" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="0" Tag="0" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="-" Tag="-" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
-      <Button Content="+" Tag="+" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="=" Tag="=" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="delete" Tag="Back" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="90"/>
     </StackPanel>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+      <Button Content="Tab" Tag="Tab" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="90"/>
       <Button Content="Q" Tag="Q" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="W" Tag="W" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="E" Tag="E" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
@@ -37,12 +40,13 @@
       <Button Content="I" Tag="I" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="O" Tag="O" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="P" Tag="P" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
-      <Button Content="⌫" Tag="Back" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="90"/>
+      <Button Content="[" Tag="[" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="]" Tag="]" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="\" Tag='\' Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
     </StackPanel>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-      <Button Content="⇧" Tag="Shift" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" Name="ShiftButton"/>
-      <Button Content="Caps" Tag="CapsLock" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" Name="CapsButton"/>
+      <Button Content="caps lock" Tag="CapsLock" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" Name="CapsButton" MinWidth="110"/>
       <Button Content="A" Tag="A" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="S" Tag="S" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="D" Tag="D" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
@@ -52,10 +56,13 @@
       <Button Content="J" Tag="J" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="K" Tag="K" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="L" Tag="L" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
-      <Button Content="Enter ↵" Tag="Enter" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="150" FontSize="24"/>
+      <Button Content=";" Tag=";" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="'" Tag="'" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="return" Tag="Enter" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="120" FontSize="24"/>
     </StackPanel>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+      <Button Content="shift" Tag="Shift" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" Name="ShiftButton" MinWidth="130"/>
       <Button Content="Z" Tag="Z" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="X" Tag="X" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="C" Tag="C" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
@@ -63,13 +70,26 @@
       <Button Content="B" Tag="B" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="N" Tag="N" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
       <Button Content="M" Tag="M" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
-      <Button Content="␣" Tag=" " Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="200"/>
-      <Button x:Name="LanguageToggleButton" 
+      <Button Content="," Tag="," Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="." Tag="." Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="/" Tag="/" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click"/>
+      <Button Content="shift" Tag="Shift" Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" MinWidth="130"/>
+    </StackPanel>
+
+    <Grid HorizontalAlignment="Stretch">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <Button Grid.Column="0" Content="␣" Tag=" " Style="{StaticResource VirtualKeyButtonStyle}" Click="Key_Click" Margin="5"/>
+      <Button Grid.Column="1" 
+              x:Name="LanguageToggleButton" 
               Content="英" 
               Click="LanguageToggle_Click"
               Style="{StaticResource VirtualKeyButtonStyle}"
               MinWidth="90"
+              Margin="5"
               Focusable="False"/>
-    </StackPanel>
+    </Grid>
   </StackPanel>
 </UserControl>
